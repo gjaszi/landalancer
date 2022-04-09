@@ -28,21 +28,21 @@ const Chat = ({ chatData, setChatData }) => {
 
   return (
     <div className='absolute inset-0 z-20 bg-slate-800 bg-opacity-70'>
-      <div className='fixed bottom-0 right-0 h-3/6 w-full sm:bottom-6 sm:right-6 sm:w-6/12 lg:w-4/12 xl:w-3/12 flex flex-col gap-4 p-6 border-t sm:rounded-xl sm:border border-slate-500 bg-slate-800 drop-shadow-lg'>
+      <div className='fixed bottom-0 right-0 h-3/6 w-full sm:right-6 sm:w-6/12 lg:w-4/12 xl:w-3/12 flex flex-col gap-4 p-4 border-t sm:rounded-t-lg sm:border sm:border-b-0 border-slate-500 bg-slate-800 drop-shadow-lg'>
         <div>
-          <div className='bg-slate-900 rounded p-2 relative flex gap-2 content-center'>
+          <div className='relative flex gap-2 content-center'>
             <img
               src={chatData.user.picture.thumbnail}
-              width={50}
+              width={40}
               alt='avatar'
-              className='rounded-full inline border-2 bg-sky-500 border-sky-500'
+              className='rounded-full inline border-2 bg-green-500 border-green-500'
             />
-            <span className='underline my-auto text-lg'>
+            <p className='underline my-auto text-xl'>
               {chatData.user.name.first} {chatData.user.name.last}
-            </span>
+            </p>
             <XIcon
-              width={25}
-              className='absolute top-0 right-0 text-red-500 cursor-pointer active:rotate-90 transition-all'
+              width={30}
+              className='absolute top-0 right-0 text-red-500 cursor-pointer active:rotate-90 transition-all animate-pulse'
               onClick={() => {
                 setChatData({
                   open: false,
@@ -74,7 +74,7 @@ const Chat = ({ chatData, setChatData }) => {
             placeholder='Some text...'
             ref={clearInputRef}
             onChange={(e) => setLatestMessage(e.target.value)}
-            className='rounded drop-shadow outline-0 p-1 focus:ring ring-sky-500 text-slate-900'
+            className='rounded drop-shadow outline-0 py-1 px-3 focus:ring ring-sky-500 text-slate-900'
           />
           <button className='button'>Send</button>
         </form>

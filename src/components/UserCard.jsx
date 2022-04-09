@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Chat from './Chat.jsx'
+import Bookmark from './Bookmark.jsx'
 import {
   ChatIcon,
   MailIcon,
@@ -6,54 +8,52 @@ import {
   BookmarkIcon,
 } from '@heroicons/react/outline'
 
-const UserCard = ({ user, setChatData }) => {
+const UserCard = ({ user }) => {
+  const [chatData, setChatData] = useState({
+    user: '',
+    open: false,
+  })
+
   return (
-    <div className='p-6 gap-6 border border-slate-500 bg-slate-800 drop-shadow-xl rounded-xl sm:grid grid-cols-[5rem,1fr] group'>
-      <div className='relative'>
-        <img
-          src={user.picture.large}
-          alt='user'
-          width={'100%'}
-          className='rounded-full border-2 border-sky-500 bg-sky-500 hidden sm:inline'
-        />
-        <img
-          src={`https://flagcdn.com/24x18/${user.nat.toLowerCase()}.png`}
-          alt='nationality'
-          className='absolute top-0 hidden sm:block drop-shadow-lg'
-        />
-      </div>
-      <div>
-        <p className='text-slate-100 text-xl font-medium'>
-          {user.name.first} {user.name.last} , {user.dob.age}
-        </p>
-        <p className='text-slate-400'>{user.email}</p>
-        <p className='text-sky-500 mr-auto'>Front-end Developer</p>
-        <div className='flex justify-end gap-2'>
-          <BookmarkIcon
-            width={23}
-            className='hover:text-sky-500 active:scale-95 hover:cursor-pointer drop-shadow transition-all inline'
+    <>
+      {chatData.open && <Chat chatData={chatData} setChatData={setChatData} />}
+      <div className='p-6 gap-4 border-2 border-slate-500 bg-slate-800 rounded-lg sm:grid grid-cols-[6rem,1fr] group'>
+        <div className='relative'>
+          <img
+            src={user.picture.large}
+            alt='user'
+            className='rounded-full border-2 border-sky-500 bg-sky-500 hidden sm:inline-block h-full align-middle'
           />
-          <ChatIcon
-            onClick={() => {
-              setChatData({
-                user: user,
-                open: true,
-              })
-            }}
-            width={25}
-            className='hover:text-sky-500 active:scale-95 hover:cursor-pointer drop-shadow transition-all inline'
-          />
-          <MailIcon
-            width={25}
-            className='hover:text-sky-500 active:scale-95 hover:cursor-pointer drop-shadow transition-all inline'
-          />
-          <InformationCircleIcon
-            width={25}
-            className='hover:text-sky-500 active:scale-95 hover:cursor-pointer drop-shadow transition-all inline'
+          <img
+            src={`https://flagcdn.com/24x18/${user.nat.toLowerCase()}.png`}
+            alt='nationality'
+            className='absolute top-0 hidden sm:block drop-shadow-lg'
           />
         </div>
+        <div>
+          <p className='text-slate-100 text-xl font-medium'>
+            {user.name.first} {user.name.last} , {user.dob.age}
+          </p>
+          <p className='text-slate-400'>{user.email}</p>
+          <p className='text-sky-500 mr-auto'>Front-end Developer</p>
+          <div className='flex justify-end gap-2'>
+            <BookmarkIcon width={23} className='user-card__icon' />
+            <ChatIcon
+              onClick={() => {
+                setChatData({
+                  user: user,
+                  open: true,
+                })
+              }}
+              width={25}
+              className='user-card__icon'
+            />
+            <MailIcon width={25} className='user-card__icon' />
+            <InformationCircleIcon width={25} className='user-card__icon' />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
