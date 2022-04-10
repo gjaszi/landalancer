@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Chat from './Chat.jsx'
-import Bookmark from './Bookmark.jsx'
+// import Bookmark from './Bookmark.jsx'
 import {
   ChatIcon,
   MailIcon,
