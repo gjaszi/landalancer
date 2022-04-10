@@ -1,12 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Chat from './Chat.jsx'
 // import Bookmark from './Bookmark.jsx'
-import {
-  ChatIcon,
-  MailIcon,
-  InformationCircleIcon,
-  BookmarkIcon,
-} from '@heroicons/react/outline'
+import { ChatIcon, MailIcon, InformationCircleIcon, BookmarkIcon } from '@heroicons/react/outline'
 
 const UserCard = ({ user }) => {
   const [isChatOpen, setIsChatOpen] = useState(false)
@@ -26,16 +21,8 @@ const UserCard = ({ user }) => {
       <div className='gap-4 py-4 px-6 bg-slate-800 rounded-lg drop-shadow-lg grid grid-cols-[1fr,1.5rem] sm:grid-cols-[6rem,1fr,1.5rem]'>
         {/* avatar */}
         <div className='hidden sm:grid content-center relative'>
-          <img
-            src={user.picture.large}
-            alt='user'
-            className='rounded-full border-2 border-sky-500 drop-shadow-xl hidden sm:inline-block'
-          />
-          <img
-            src={`https://flagcdn.com/24x18/${user.nat.toLowerCase()}.png`}
-            alt='nationality'
-            className='absolute top-2'
-          />
+          <img src={user.picture.large} alt='user' className='rounded-full border-2 border-sky-500 drop-shadow-xl hidden sm:inline-block' />
+          <img src={`https://flagcdn.com/24x18/${user.nat.toLowerCase()}.png`} alt='nationality' className='absolute top-2' />
         </div>
 
         {/* info */}
