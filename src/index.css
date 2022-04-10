@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply select-none;
-  }
   .button {
     @apply text-center bg-sky-600 hover:bg-sky-700 rounded disabled:bg-slate-600;
   }
