@@ -2,12 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { getDate } from '../api/utils'
 import { XIcon } from '@heroicons/react/outline'
 
-const Chat = ({
-  user,
-  setIsChatOpen,
-  previousMessages,
-  setPreviousMessages,
-}) => {
+const Chat = ({ user, setIsChatOpen, previousMessages, setPreviousMessages }) => {
   const [messages, setMessages] = useState(previousMessages)
   const [latestMessage, setLatestMessage] = useState('')
   const inputRef = useRef(null)
@@ -49,13 +44,8 @@ const Chat = ({
       <div className='fixed bottom-0 right-0 h-3/6 w-full sm:right-6 sm:w-6/12 lg:w-4/12 xl:w-3/12 flex flex-col gap-4 p-4 border-t sm:rounded-t-lg sm:border sm:border-b-0 border-slate-500 bg-slate-800 drop-shadow-lg'>
         <div>
           <div className='relative flex gap-2 content-center'>
-            <img
-              src={user.picture.thumbnail}
-              width={40}
-              alt='avatar'
-              className='rounded-full inline border-2 bg-green-500 border-green-500'
-            />
-            <p className='underline my-auto text-xl'>
+            <img src={user.picture.thumbnail} width={40} alt='avatar' className='rounded-full inline border-2 bg-green-500 border-green-500' />
+            <p className='my-auto text-xl'>
               {user.name.first} {user.name.last}
             </p>
             <XIcon
@@ -69,18 +59,14 @@ const Chat = ({
           {messages &&
             messages.map((message, i) => (
               <div key={`message-${i}`} className='pb-1 text-right'>
-                <span
-                  key={message.message}
-                  className='break-words py-2 px-4  inline-block rounded-full bg-slate-800'>
+                <span key={message.message} className='break-words py-2 px-4  inline-block rounded-full bg-slate-800'>
                   {message.message}
                 </span>
               </div>
             ))}
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className='grid grid-cols-[1fr,5rem] gap-4'>
+        <form onSubmit={handleSubmit} className='grid grid-cols-[1fr,5rem] gap-4'>
           <input
             type='text'
             placeholder='Some text...'
