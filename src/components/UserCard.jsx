@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import Chat from './Chat.jsx'
 // import Bookmark from './Bookmark.jsx'
 import {
@@ -12,48 +12,52 @@ const UserCard = ({ user }) => {
   const [isChatOpen, setIsChatOpen] = useState(false)
   const [previousMessages, setPreviousMessages] = useState([])
 
+  const chatProps = {
+    key: user.login.uuid,
+    user,
+    previousMessages,
+    setPreviousMessages,
+    setIsChatOpen,
+  }
+
   return (
     <>
-      {isChatOpen && (
-        <Chat
-          key={user.login.uuid}
-          user={user}
-          previousMessages={previousMessages}
-          setIsChatOpen={setIsChatOpen}
-          setPreviousMessages={setPreviousMessages}
-        />
-      )}
-      <div className='p-6 gap-4 border-2 border-slate-500 bg-slate-800 rounded-lg sm:grid grid-cols-[6rem,1fr] group'>
-        <div className='relative'>
+      {isChatOpen && <Chat {...chatProps} />}
+      <div className='gap-4 py-4 px-6 bg-slate-800 rounded-lg drop-shadow-lg grid grid-cols-[1fr,1.5rem] sm:grid-cols-[6rem,1fr,1.5rem]'>
+        {/* avatar */}
+        <div className='hidden sm:grid content-center relative'>
           <img
             src={user.picture.large}
             alt='user'
-            className='rounded-full border-2 border-sky-500 bg-sky-500 hidden sm:inline-block h-full align-middle'
+            className='rounded-full border-2 border-sky-500 drop-shadow-xl hidden sm:inline-block'
           />
           <img
             src={`https://flagcdn.com/24x18/${user.nat.toLowerCase()}.png`}
             alt='nationality'
-            className='absolute top-0 hidden sm:block drop-shadow-lg'
+            className='absolute top-2'
           />
         </div>
-        <div>
-          <p className='text-slate-100 text-xl font-medium'>
-            {user.name.first} {user.name.last} , {user.dob.age}
+
+        {/* info */}
+        <div className='flex flex-col'>
+          <p className='text-xl font-medium pr-2 inline-block'>
+            {user.name.first} {user.name.last}
           </p>
           <p className='text-slate-400'>{user.email}</p>
           <p className='text-sky-500 mr-auto'>Front-end Developer</p>
-          <div className='flex justify-end gap-2'>
-            <BookmarkIcon width={23} className='user-card__icon' />
-            <ChatIcon
-              onClick={() => {
-                setIsChatOpen(true)
-              }}
-              width={25}
-              className='user-card__icon'
-            />
-            <MailIcon width={25} className='user-card__icon' />
-            <InformationCircleIcon width={25} className='user-card__icon' />
-          </div>
+        </div>
+        {/* controls */}
+        <div className='grid gap-1 content-center justify-end'>
+          <InformationCircleIcon className='user-card__icon' />
+          <BookmarkIcon className='user-card__icon' />
+          <ChatIcon
+            onClick={() => {
+              setIsChatOpen(true)
+            }}
+            width={'100%'}
+            className='user-card__icon'
+          />
+          <MailIcon className='user-card__icon' />
         </div>
       </div>
     </>

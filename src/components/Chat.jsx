@@ -10,28 +10,26 @@ const Chat = ({
 }) => {
   const [messages, setMessages] = useState(previousMessages)
   const [latestMessage, setLatestMessage] = useState('')
-  const clearInputRef = useRef(null)
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Escape') setIsChatOpen(false)
-  }
+  const inputRef = useRef(null)
 
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setIsChatOpen(false)
+    }
+
+    inputRef.current.focus()
+
     window.addEventListener('keydown', handleKeyDown)
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [])
-
-  useEffect(() => {
-    clearInputRef.current.focus()
-  }, [])
+  }, [setIsChatOpen])
 
   useEffect(() => {
     setPreviousMessages(messages)
   }, [setPreviousMessages, messages])
 
-  let handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     if (latestMessage.trim()) {
       setMessages((prevState) => [
@@ -43,7 +41,7 @@ const Chat = ({
       ])
     }
     setLatestMessage('')
-    clearInputRef.current.value = ''
+    inputRef.current.value = ''
   }
 
   return (
@@ -73,7 +71,7 @@ const Chat = ({
               <div key={`message-${i}`} className='pb-1 text-right'>
                 <span
                   key={message.message}
-                  className='break-words p-1 px-3  inline-block rounded bg-slate-800'>
+                  className='break-words py-2 px-4  inline-block rounded-full bg-slate-800'>
                   {message.message}
                 </span>
               </div>
@@ -86,7 +84,7 @@ const Chat = ({
           <input
             type='text'
             placeholder='Some text...'
-            ref={clearInputRef}
+            ref={inputRef}
             onChange={(e) => setLatestMessage(e.target.value)}
             className='rounded drop-shadow outline-0 py-1 px-3 focus:ring ring-sky-500 text-slate-900'
           />
