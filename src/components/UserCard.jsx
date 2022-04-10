@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Chat from './Chat.jsx'
 // import Bookmark from './Bookmark.jsx'
 import {
@@ -9,14 +9,20 @@ import {
 } from '@heroicons/react/outline'
 
 const UserCard = ({ user }) => {
-  const [chatData, setChatData] = useState({
-    user: '',
-    open: false,
-  })
+  const [isChatOpen, setIsChatOpen] = useState(false)
+  const [previousMessages, setPreviousMessages] = useState([])
 
   return (
     <>
-      {chatData.open && <Chat chatData={chatData} setChatData={setChatData} />}
+      {isChatOpen && (
+        <Chat
+          key={user.login.uuid}
+          user={user}
+          previousMessages={previousMessages}
+          setIsChatOpen={setIsChatOpen}
+          setPreviousMessages={setPreviousMessages}
+        />
+      )}
       <div className='p-6 gap-4 border-2 border-slate-500 bg-slate-800 rounded-lg sm:grid grid-cols-[6rem,1fr] group'>
         <div className='relative'>
           <img
@@ -40,10 +46,7 @@ const UserCard = ({ user }) => {
             <BookmarkIcon width={23} className='user-card__icon' />
             <ChatIcon
               onClick={() => {
-                setChatData({
-                  user: user,
-                  open: true,
-                })
+                setIsChatOpen(true)
               }}
               width={25}
               className='user-card__icon'

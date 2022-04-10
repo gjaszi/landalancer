@@ -24,7 +24,7 @@ const App = () => {
         <h2 className='pt-12 pl-2 text-sky-500'>People you might like</h2>
         <div className='grid gap-4 lg:grid-cols-2'>
           {userData.map((user, i) => (
-            <UserCard key={i} user={user} />
+            <UserCard key={user.login.uuid} user={user} />
           ))}
         </div>
         <button className='button py-2 px-4 mt-4' onClick={() => fetchUsers()}>
