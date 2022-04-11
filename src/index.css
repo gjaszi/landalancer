@@ -8,6 +8,9 @@
   #root {
     @apply h-full bg-slate-900 text-slate-100 font-sans;
   }
+  * {
+    @apply antialiased;
+  }
   .button {
     @apply text-center bg-sky-600 hover:bg-sky-700 rounded disabled:bg-slate-600;
   }

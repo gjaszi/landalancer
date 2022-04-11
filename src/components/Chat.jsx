@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
+import { DataContext } from '../context/DataContext'
 import { getDate } from '../api/utils'
 import { XIcon } from '@heroicons/react/outline'
 
-const Chat = ({ user, setIsChatOpen, previousMessages, setPreviousMessages }) => {
-  const [messages, setMessages] = useState(previousMessages)
+const Chat = ({ user, setIsChatOpen }) => {
+  const { messages, setMessages } = useContext(DataContext)
   const [latestMessage, setLatestMessage] = useState('')
+  const filteredUsers = messages.filter((currentUser) => currentUser.user_email === user.email)
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -20,18 +22,15 @@ const Chat = ({ user, setIsChatOpen, previousMessages, setPreviousMessages }) =>
     }
   }, [setIsChatOpen])
 
-  useEffect(() => {
-    setPreviousMessages(messages)
-  }, [setPreviousMessages, messages])
-
   const handleSubmit = (e) => {
     e.preventDefault()
     if (latestMessage.trim()) {
-      setMessages((prevState) => [
-        ...prevState,
+      setMessages((state) => [
+        ...state,
         {
-          date: getDate(),
+          user_email: user.email,
           message: latestMessage,
+          date: getDate(),
         },
       ])
     }
@@ -56,14 +55,13 @@ const Chat = ({ user, setIsChatOpen, previousMessages, setPreviousMessages }) =>
           </div>
         </div>
         <div className='grow bg-slate-900 p-4 rounded overflow-scroll overflow-x-hidden'>
-          {messages &&
-            messages.map((message, i) => (
-              <div key={`message-${i}`} className='pb-1 text-right'>
-                <span key={message.message} className='break-words py-2 px-4  inline-block rounded-full bg-slate-800'>
-                  {message.message}
-                </span>
-              </div>
-            ))}
+          {filteredUsers.map((filteredUser, i) => (
+            <div key={`filteredUser-${i}`} className='pb-1 text-right'>
+              <span key={filteredUser.message} className='break-words py-2 px-4  inline-block rounded-full bg-slate-800'>
+                {filteredUser.message}
+              </span>
+            </div>
+          ))}
         </div>
 
         <form onSubmit={handleSubmit} className='grid grid-cols-[1fr,5rem] gap-4'>
