@@ -6,13 +6,11 @@ import Discover from './pages/Discover'
 import Bookmark from './pages/Bookmark'
 import NotFound from './pages/NotFound'
 import DataContext from './context/DataContext'
-import Construction from './components/Construction'
 
 const App = () => {
   return (
     <>
       <Router>
-        <Construction />
         <Nav />
         <DataContext>
           <Routes>

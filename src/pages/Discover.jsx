@@ -1,21 +1,23 @@
 import React, { useContext, useState, useEffect } from 'react'
+import Pagination from '../components/Pagination'
 import UserCard from '../components/UserCard'
 import { DataContext } from '../context/DataContext'
 
 const Discover = () => {
   const { userData } = useContext(DataContext)
-  const [pagingUsers, setPagingUsers] = useState({
-    start: 0,
-    end: 10,
-  })
-  const [disabledPaging, setDisabledPaging] = useState(false)
+  const [activePage, setActivePage] = useState(1)
+  const [resultsPerPage, setResultsPerPage] = useState(6)
+  const [numberOfPages, setNumberOfPages] = useState(null)
 
   useEffect(() => {
-    if (pagingUsers.start === 30) {
-      setDisabledPaging(true)
-    }
-    console.log(JSON.stringify(pagingUsers, null, 2))
-  }, [pagingUsers])
+    setNumberOfPages(Math.round(userData.length / resultsPerPage), 0)
+  }, [userData.length, resultsPerPage])
+
+  const paginationProps = {
+    activePage,
+    setActivePage,
+    numberOfPages,
+  }
 
   return (
     <div className='mx-auto lg:max-w-7xl p-6'>
@@ -23,21 +25,11 @@ const Discover = () => {
         <h2 className='text-sky-500 text-xl sm:text-2xl font-bold my-auto'>People you might like</h2>
       </div>
       <div className='grid gap-4 py-4 lg:grid-cols-2'>
-        {userData.slice(pagingUsers.start, pagingUsers.end).map((user, i) => {
+        {userData.slice(activePage * resultsPerPage - resultsPerPage, activePage * resultsPerPage).map((user, i) => {
           return <UserCard key={user.login.uuid} user={user} />
         })}
       </div>
-      <button
-        disabled={disabledPaging}
-        className='button py-2 px-4'
-        onClick={() =>
-          setPagingUsers((state) => ({
-            start: state.end,
-            end: state.end + 10,
-          }))
-        }>
-        Load more
-      </button>
+      <Pagination {...paginationProps} />
     </div>
   )
 }

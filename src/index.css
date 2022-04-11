@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply h-screen;
+  }
   html,
   body,
   #root {
-    @apply h-full bg-slate-900 text-slate-100 font-sans;
+    @apply h-full text-slate-100 font-sans bg-slate-900;
   }
   * {
     @apply antialiased;
@@ -16,5 +19,11 @@
   }
   .user-card__icon {
     @apply text-slate-400 hover:text-sky-500 active:scale-95 hover:cursor-pointer drop-shadow transition-all inline hover:animate-pulse mx-auto;
+  }
+  .pagination {
+    @apply py-1 px-2 cursor-pointer hover:bg-slate-600 rounded-full;
+  }
+  .pagination--active {
+    @apply underline underline-offset-1 font-bold decoration-sky-500 transition-all;
   }
 }
