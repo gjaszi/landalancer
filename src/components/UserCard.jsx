@@ -26,7 +26,11 @@ const UserCard = ({ user }) => {
       <div className='gap-4 p-6 bg-slate-800 rounded-lg drop-shadow-lg grid sm:grid-cols-[5rem,1fr,6rem]'>
         {/* avatar */}
         <div className='hidden sm:grid content-center'>
-          <img src={user.picture.large} alt='user' className='rounded-full border-2 border-sky-500 sm:inline-block' />
+          <img
+            src={user.picture.large}
+            alt='user'
+            className='rounded-full drop-shadow ring-2 outline outline-sky-500 ring-sky-500 bg-sky-500 sm:inline-block'
+          />
         </div>
 
         {/* info */}
