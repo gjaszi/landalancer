@@ -5,7 +5,7 @@ const Nav = () => {
   return (
     <>
       <header className='bg-slate-800 h-12 px-6'>
-        <div className='mx-auto xl:max-w-6xl flex gap-4 items-center justify-center h-full'>
+        <div className='mx-auto lg:max-w-7xl flex gap-4 p-6 items-center justify-center h-full'>
           <div className='sm:mr-auto'>
             <p className='text-2xl font-bold inline-block tracking-widest'>
               LANDALANCER<span className='text-sky-500'>.</span>

@@ -1,9 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { DataContext } from '../context/DataContext'
 
 const Home = () => {
-  const { avatarData } = useContext(DataContext)
+  const { userData } = useContext(DataContext)
+  const [displayedAvatars, setDisplayedAvatars] = useState()
+  const [windowSize, setWindowSize] = useState(window.innerWidth)
+
+  const handleResize = useCallback(() => {
+    setWindowSize(window.innerWidth)
+  }, [setWindowSize])
+
+  useEffect(() => {
+    if (windowSize <= 1024 && displayedAvatars !== 20) setDisplayedAvatars(20)
+    else if (windowSize >= 1024 && displayedAvatars !== 40) setDisplayedAvatars(40)
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [handleResize, windowSize, displayedAvatars])
 
   return (
     <div className='grid gap-24 content-center h-full'>
@@ -21,9 +35,9 @@ const Home = () => {
         <button className='button text-xl py-2 px-4 shadow-lg mx-auto block'>
           <Link to='/discover'>Meet our workforce</Link>
         </button>
-        <div className='grid grid-cols-10 sm:grid-cols-[repeat(20,1fr)] gap-4 mx-auto overflow-hidden bg-slate-800 p-4'>
-          {avatarData.map((avatar, i) => (
-            <img width={100} key={`avatar-${i}`} src={avatar} alt='user' className='rounded-xl shadow-lg'></img>
+        <div className='grid grid-cols-10 lg:grid-cols-[repeat(20,1fr)] gap-4 mx-auto overflow-hidden bg-slate-800 p-4'>
+          {userData.slice(0, displayedAvatars).map(({ picture }, i) => (
+            <img width={100} key={`avatar-${i}`} src={picture.large} alt='user' className='rounded-xl shadow-lg drop-shadow-md'></img>
           ))}
         </div>
       </div>
