@@ -22,9 +22,9 @@ const Home = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam ipsam, blanditiis saepe aut quam labore deserunt placeat cupiditate, quod
           nobis nam pariatur laboriosam harum, voluptas eos.
         </p>
-        <button className='button font-bold tracking-wide text-2xl mt-24 py-3 px-5 max-w-fit mx-auto hover:drop-shadow-lg'>
-          <Link to='/discover'>Meet our workforce</Link>
-        </button>
+        <Link to='/discover' className='button font-bold tracking-wide text-2xl mt-24 py-3 px-5 max-w-fit mx-auto hover:drop-shadow-lg'>
+          Meet our workforce
+        </Link>
       </div>
       <div className='grid content-center grid-cols-5 sm:grid-cols-[repeat(10,1fr)] xl:grid-cols-[repeat(20,1fr)] gap-4 p-4 bg-slate-800 bg-opacity-0'>
         {userData.slice(0, displayedAvatars).map(({ picture }, i) => (
