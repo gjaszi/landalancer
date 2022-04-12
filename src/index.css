@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    @apply antialiased;
+  }
   html {
     @apply h-screen;
   }
@@ -11,11 +14,11 @@
   #root {
     @apply h-full text-slate-100 font-sans bg-slate-900;
   }
-  * {
-    @apply antialiased;
+  #root {
+    @apply flex flex-col;
   }
   .button {
-    @apply text-center bg-sky-600 hover:bg-sky-700 rounded disabled:bg-slate-600;
+    @apply text-center bg-sky-600 hover:bg-sky-700 rounded disabled:bg-slate-600 transition-all;
   }
   .user-card__icon {
     @apply text-slate-400 hover:text-sky-500 active:scale-95 hover:cursor-pointer drop-shadow transition-all inline hover:animate-pulse mx-auto;
@@ -25,5 +28,8 @@
   }
   .pagination--active {
     @apply underline underline-offset-1 font-bold decoration-sky-500 transition-all;
+  }
+  .nav__link {
+    @apply text-slate-200 cursor-pointer transition-all hover:underline text-lg select-none;
   }
 }

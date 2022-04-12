@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { DataContext } from '../context/DataContext'
 import { getDate } from '../api/utils'
 import { XIcon } from '@heroicons/react/outline'
@@ -6,15 +6,11 @@ import { XIcon } from '@heroicons/react/outline'
 const Chat = ({ user, setIsChatOpen }) => {
   const { messages, setMessages } = useContext(DataContext)
   const [latestMessage, setLatestMessage] = useState('')
-  const filteredUsers = messages.filter((currentUser) => currentUser.user_email === user.email)
-  const inputRef = useRef(null)
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setIsChatOpen(false)
     }
-
-    inputRef.current.focus()
 
     window.addEventListener('keydown', handleKeyDown)
     return () => {
@@ -35,7 +31,6 @@ const Chat = ({ user, setIsChatOpen }) => {
       ])
     }
     setLatestMessage('')
-    inputRef.current.value = ''
   }
 
   return (
@@ -55,24 +50,27 @@ const Chat = ({ user, setIsChatOpen }) => {
           </div>
         </div>
         <div className='grow bg-slate-900 p-4 rounded overflow-scroll overflow-x-hidden'>
-          {filteredUsers.map((filteredUser, i) => (
-            <div key={`filteredUser-${i}`} className='pb-1 text-right'>
-              <span key={filteredUser.message} className='break-words py-2 px-4  inline-block rounded-full bg-slate-800'>
-                {filteredUser.message}
-              </span>
-            </div>
-          ))}
+          {messages
+            .filter((currentUser) => currentUser.user_email === user.email)
+            .map((filteredUser, i) => (
+              <div key={`filteredUser-${i}`} className='pb-1 text-right'>
+                <span key={filteredUser.message} className='break-words py-2 px-4  inline-block rounded-full bg-slate-800'>
+                  {filteredUser.message}
+                </span>
+              </div>
+            ))}
         </div>
 
-        <form onSubmit={handleSubmit} className='grid grid-cols-[1fr,5rem] gap-4'>
+        <form onSubmit={handleSubmit} className='flex gap-2'>
           <input
+            autoFocus
             type='text'
             placeholder='Some text...'
-            ref={inputRef}
+            value={latestMessage}
             onChange={(e) => setLatestMessage(e.target.value)}
-            className='rounded drop-shadow outline-0 py-1 px-3 focus:ring ring-sky-500 text-slate-900'
+            className='grow rounded drop-shadow outline-0 py-1 px-3 focus:ring ring-sky-500 text-slate-900'
           />
-          <button className='button'>Send</button>
+          <button className='button max-w-fit px-2'>Send</button>
         </form>
       </div>
     </div>

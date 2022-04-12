@@ -6,12 +6,13 @@ import { DataContext } from '../context/DataContext'
 const Discover = () => {
   const { userData } = useContext(DataContext)
   const [activePage, setActivePage] = useState(1)
-  const [resultsPerPage, setResultsPerPage] = useState(6)
+  const resultsPerPage = 6
+  // const [resultsPerPage, setResultsPerPage] = useState(6)
   const [numberOfPages, setNumberOfPages] = useState(null)
 
   useEffect(() => {
     setNumberOfPages(Math.round(userData.length / resultsPerPage), 0)
-  }, [userData.length, resultsPerPage])
+  }, [userData.length])
 
   const paginationProps = {
     activePage,
