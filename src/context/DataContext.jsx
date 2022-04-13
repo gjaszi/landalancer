@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState, createContext, useCallback } from 'react'
+import React, { useEffect, useState, createContext, useCallback } from 'react'
 import axios from 'axios'
 
 export const DataContext = createContext()
@@ -21,7 +21,7 @@ const DataContextProvider = ({ children }) => {
     setWindowWidth(window.innerWidth)
   }, [setWindowWidth])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [handleResize])
