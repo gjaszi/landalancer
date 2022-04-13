@@ -6,7 +6,6 @@ export const DataContext = createContext()
 const DataContextProvider = ({ children }) => {
   const [userData, setUserData] = useState([])
   const [bookmarkData, setBookmarkData] = useState([])
-  const [messages, setMessages] = useState([])
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const fetchUsers = useCallback(async () => {
@@ -31,8 +30,6 @@ const DataContextProvider = ({ children }) => {
     userData,
     bookmarkData,
     setBookmarkData,
-    messages,
-    setMessages,
     windowWidth,
   }
 

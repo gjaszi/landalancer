@@ -17,19 +17,4 @@
   #root {
     @apply flex flex-col;
   }
-  .button {
-    @apply text-center bg-sky-500 hover:bg-sky-700 rounded disabled:bg-slate-600 transition-all;
-  }
-  .user-card__icon {
-    @apply text-slate-400 hover:text-sky-500 active:scale-95 hover:cursor-pointer drop-shadow transition-all inline hover:animate-pulse mx-auto;
-  }
-  .pagination {
-    @apply py-1 px-2 cursor-pointer hover:bg-slate-600 rounded-full;
-  }
-  .pagination--active {
-    @apply underline underline-offset-1 font-bold decoration-sky-500 transition-all;
-  }
-  .nav__link {
-    @apply text-slate-200 cursor-pointer transition-all hover:underline text-lg select-none;
-  }
 }

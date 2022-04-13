@@ -7,8 +7,9 @@ const Home = () => {
   const [displayedAvatars, setDisplayedAvatars] = useState()
 
   useEffect(() => {
-    if (windowWidth <= 1280) setDisplayedAvatars(20)
-    else if (windowWidth >= 1280) setDisplayedAvatars(40)
+    if (windowWidth <= 640) return setDisplayedAvatars(10)
+    if (windowWidth <= 1280) return setDisplayedAvatars(20)
+    if (windowWidth >= 1280) return setDisplayedAvatars(40)
   }, [windowWidth])
 
   return (
@@ -22,7 +23,9 @@ const Home = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam ipsam, blanditiis saepe aut quam labore deserunt placeat cupiditate, quod
           nobis nam pariatur laboriosam harum, voluptas eos.
         </p>
-        <Link to='/discover' className='button font-bold tracking-wide text-2xl mt-24 py-3 px-5 max-w-fit mx-auto hover:drop-shadow-lg'>
+        <Link
+          to='/discover'
+          className='bg-sky-500 hover:bg-sky-800 rounded-lg drop-shadow font-bold tracking-wide text-2xl mt-24 py-3 px-5 max-w-fit mx-auto'>
           Meet our workforce
         </Link>
       </div>

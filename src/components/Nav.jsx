@@ -7,8 +7,15 @@ const Nav = () => {
   const { windowWidth } = useContext(DataContext)
   const [navOpen, setNavOpen] = useState(false)
 
+  const closeNavigation = () => {
+    setNavOpen(false)
+  }
+  const openNavigation = () => {
+    setNavOpen(true)
+  }
+
   useEffect(() => {
-    if (windowWidth >= 640) setNavOpen(false)
+    if (windowWidth >= 640) closeNavigation()
   }, [windowWidth])
 
   return (
@@ -20,35 +27,35 @@ const Nav = () => {
           </Link>
 
           <div className='hidden gap-4 sm:flex'>
-            <Link to='/' className='nav__link'>
+            <Link to='/' className='text-lg select-none hover:underline hover:decoration-sky-500'>
               Home
             </Link>
-            <Link to='/discover' className='nav__link'>
+            <Link to='/discover' className='text-lg select-none hover:underline hover:decoration-sky-500'>
               Discover
             </Link>
-            <Link to='/bookmark' className='nav__link'>
+            <Link to='/bookmark' className='text-lg select-none hover:underline hover:decoration-sky-500'>
               Bookmarks
             </Link>
           </div>
           {navOpen ? (
-            <XIcon width={25} onClick={() => setNavOpen(!navOpen)} className='sm:hidden cursor-pointer active:rotate-90 transition-all' />
+            <XIcon width={25} onClick={closeNavigation} className='sm:hidden cursor-pointer active:rotate-90 transition-all' />
           ) : (
-            <MenuIcon width={25} onClick={() => setNavOpen(!navOpen)} className='sm:hidden cursor-pointer active:-rotate-90 transition-all' />
+            <MenuIcon width={25} onClick={openNavigation} className='sm:hidden cursor-pointer active:-rotate-90 transition-all' />
           )}
         </div>
         <div
           className={`absolute flex justify-evenly ${
             navOpen ? `translate-y-0` : '-translate-y-full'
           } transition-all z-10 top-12 right-0 left-0 px-6 py-2 bg-slate-900 border-b border-slate-800 sm:hidden`}>
-          <Link to='/' className='nav__link' onClick={() => setNavOpen(!navOpen)}>
+          <Link to='/' className='text-lg select-none hover:underline hover:decoration-sky-500'>
             Home
           </Link>
 
-          <Link to='/discover' className='nav__link' onClick={() => setNavOpen(!navOpen)}>
+          <Link to='/discover' className='text-lg select-none hover:underline hover:decoration-sky-500'>
             Discover
           </Link>
 
-          <Link to='/bookmark' className='nav__link' onClick={() => setNavOpen(!navOpen)}>
+          <Link to='/bookmark' className='text-lg select-none hover:underline hover:decoration-sky-500'>
             Bookmarks
           </Link>
         </div>
