@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Pagination from '../components/Pagination'
 import UserCard from '../components/UserCard'
+import Layout from '../components/Layout'
 import { DataContext } from '../context/DataContext'
 
 const Discover = () => {
@@ -18,7 +19,7 @@ const Discover = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setNotificationMessage(null)
-    }, 3000)
+    }, 1500)
 
     return () => clearTimeout(timer)
   })
@@ -38,20 +39,21 @@ const Discover = () => {
   }
 
   return (
-    <div className='mx-auto lg:max-w-7xl p-6'>
-      {notificationMessage && (
-        <p className='text-center max-w-fit my-2 ml-auto py-2 px-4 bg-green-500 text-slate-900 shadow-lg rounded-lg'>{notificationMessage}</p>
-      )}
-      <div className='grid gap-2 sm:grid-cols-[1fr,10rem]'>
-        <h2 className='text-sky-500 text-xl sm:text-2xl font-bold my-auto'>People you might like</h2>
-      </div>
+    <Layout>
+      <p
+        className={`${
+          notificationMessage ? 'scale-100' : 'scale-0'
+        } fixed z-20 top-12 inset-x-0 mx-auto max-w-fit py-1 px-2 transition-all bg-green-600 shadow-lg rounded-lg`}>
+        {notificationMessage}
+      </p>
+      <h2 className='text-sky-500 text-xl sm:text-2xl font-bold my-auto'>People you might like</h2>
       <div className='grid gap-4 py-4 lg:grid-cols-2'>
         {userData.slice(getStartIndex(), getEndIndex()).map((user) => {
           return <UserCard key={user.login.uuid} user={user} setNotificationMessage={setNotificationMessage} />
         })}
       </div>
       <Pagination {...paginationProps} />
-    </div>
+    </Layout>
   )
 }
 

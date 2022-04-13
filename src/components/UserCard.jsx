@@ -7,12 +7,12 @@ const UserCard = ({ user, setNotificationMessage }) => {
 
   const handleBookmark = () => {
     setBookmarkData((prevState) => [...prevState, user])
-    setNotificationMessage('User bookmarked!')
+    setNotificationMessage('User bookmarked')
   }
 
   const handleMail = () => {
     navigator.clipboard.writeText(user.email)
-    setNotificationMessage('Email copied to clipboard.')
+    setNotificationMessage('Email copied to clipboard')
   }
 
   return (

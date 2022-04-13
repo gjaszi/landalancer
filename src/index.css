@@ -9,6 +9,9 @@
   html {
     @apply h-screen;
   }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
   html,
   body,
   #root {
@@ -16,5 +19,11 @@
   }
   #root {
     @apply flex flex-col;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }

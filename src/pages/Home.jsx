@@ -13,7 +13,7 @@ const Home = () => {
   }, [windowWidth])
 
   return (
-    <div className='h-full flex flex-col bg-gradient-to-t from-sky-700 via-slate-800 to-slate-900'>
+    <main className='h-full flex flex-col bg-gradient-to-t from-sky-700 via-slate-800 to-slate-900'>
       <div className='grow p-6 grid content-center gap-4 select-none'>
         <p className='text-4xl md:text-8xl drop-shadow text-sky-500 text-center'>Trouble finding freelancers?</p>
         <p className='text-2xl md:text-5xl drop-shadow text-center font-bold'>
@@ -34,7 +34,7 @@ const Home = () => {
           <img width={100} key={`avatar-${i}`} src={picture.large} alt='user' className='rounded-xl shadow-lg drop-shadow-md'></img>
         ))}
       </div>
-    </div>
+    </main>
   )
 }
 
