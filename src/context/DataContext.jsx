@@ -1,5 +1,5 @@
-import React, { useEffect, useState, createContext, useCallback } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState, createContext, useCallback } from "react"
+import axios from "axios"
 
 export const DataContext = createContext()
 
@@ -22,8 +22,8 @@ const DataContextProvider = ({ children }) => {
   }, [setWindowWidth])
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
   }, [handleResize])
 
   const values = {
