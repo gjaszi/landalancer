@@ -18,7 +18,7 @@
     @apply h-full text-slate-100 font-sans bg-slate-900;
   }
   #root {
-    @apply flex flex-col;
+    @apply flex flex-col relative;
   }
 }
 

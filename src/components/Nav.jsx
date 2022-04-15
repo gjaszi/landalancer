@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { MenuIcon, XIcon } from "@heroicons/react/solid"
+import { IoClose, IoMenu } from "react-icons/io5"
 import { DataContext } from "../context/DataContext"
+import Notifications from "./Notifications"
 
 const Nav = () => {
   const { windowWidth } = useContext(DataContext)
@@ -21,43 +22,32 @@ const Nav = () => {
   return (
     <>
       <header className="h-12 mb-12">
-        <div className="mx-auto lg:max-w-7xl flex p-6 items-center justify-center h-full relative z-20 bg-slate-900">
-          <Link
-            to="/"
-            className="mr-auto text-2xl font-bold inline-block tracking-widest select-none"
-          >
+        <div className="mx-auto h-full lg:max-w-7xl p-6 flex items-center justify-center relative z-20 bg-slate-900">
+          <Notifications />
+          <Link to="/" className="mr-auto text-2xl font-bold inline-block tracking-widest select-none">
             LANDALANCER<span className="text-sky-500">.</span>
           </Link>
 
           <div className="hidden gap-4 sm:flex">
-            <Link
-              to="/"
-              className="text-lg select-none hover:underline hover:decoration-sky-500"
-            >
+            <Link to="/" className="text-lg select-none hover:underline hover:decoration-sky-500">
               Home
             </Link>
-            <Link
-              to="/discover"
-              className="text-lg select-none hover:underline hover:decoration-sky-500"
-            >
+            <Link to="/discover" className="text-lg select-none hover:underline hover:decoration-sky-500">
               Discover
             </Link>
-            <Link
-              to="/bookmark"
-              className="text-lg select-none hover:underline hover:decoration-sky-500"
-            >
-              Bookmarks
+            <Link to="/pins" className="text-lg select-none hover:underline hover:decoration-sky-500">
+              Your Pins
             </Link>
           </div>
           {navOpen ? (
-            <XIcon
-              width={25}
+            <IoClose
+              size={25}
               onClick={closeNavigation}
               className="sm:hidden cursor-pointer active:rotate-90 transition-all"
             />
           ) : (
-            <MenuIcon
-              width={25}
+            <IoMenu
+              size={25}
               onClick={openNavigation}
               className="sm:hidden cursor-pointer active:-rotate-90 transition-all"
             />
@@ -85,11 +75,11 @@ const Nav = () => {
           </Link>
 
           <Link
-            to="/bookmark"
+            to="/pins"
             onClick={closeNavigation}
             className="text-lg select-none hover:underline hover:decoration-sky-500"
           >
-            Bookmarks
+            Your Pins
           </Link>
         </div>
       </header>

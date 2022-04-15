@@ -5,8 +5,9 @@ export const DataContext = createContext()
 
 const DataContextProvider = ({ children }) => {
   const [userData, setUserData] = useState([])
-  const [bookmarkData, setBookmarkData] = useState([])
+  const [pins, setPins] = useState([])
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [notificationMessage, setNotificationMessage] = useState("")
 
   const fetchUsers = useCallback(async () => {
     const response = await axios.get(`https://randomuser.me/api/?results=40`)
@@ -28,9 +29,11 @@ const DataContextProvider = ({ children }) => {
 
   const values = {
     userData,
-    bookmarkData,
-    setBookmarkData,
+    pins,
+    setPins,
     windowWidth,
+    notificationMessage,
+    setNotificationMessage,
   }
 
   return <DataContext.Provider value={values}>{children}</DataContext.Provider>

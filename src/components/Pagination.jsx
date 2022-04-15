@@ -1,5 +1,5 @@
 import React from "react"
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/solid"
+import { HiChevronRight, HiChevronLeft } from "react-icons/hi"
 
 const Pagination = ({ activePage, setActivePage, numberOfPages }) => {
   const pages = [...Array(numberOfPages)].map((e, i) => i + 1)
@@ -9,9 +9,10 @@ const Pagination = ({ activePage, setActivePage, numberOfPages }) => {
   }
 
   return (
-    <div className="bg-slate-800 max-w-fit mx-auto p-2 rounded-lg drop-shadow-lg select-none">
-      <ArrowLeftIcon
-        className="w-8 p-1 inline-block cursor-pointer hover:text-sky-500 hover:bg-slate-700 hover:rounded-full"
+    <div className="bg-slate-800 max-w-fit mx-auto my-4 p-2 rounded-lg drop-shadow-lg select-none">
+      <HiChevronLeft
+        size={30}
+        className="p-1 inline-block cursor-pointer hover:text-sky-500 hover:bg-slate-700 hover:rounded-full"
         onClick={() => handlePagination(activePage - 1)}
       />
       {pages.map((page, i) => (
@@ -25,8 +26,9 @@ const Pagination = ({ activePage, setActivePage, numberOfPages }) => {
           {page}
         </span>
       ))}
-      <ArrowRightIcon
-        className="w-8 p-1 inline-block cursor-pointer hover:text-sky-500 hover:bg-slate-700 hover:rounded-full"
+      <HiChevronRight
+        size={30}
+        className="p-1 inline-block cursor-pointer hover:text-sky-500 hover:bg-slate-700 hover:rounded-full"
         onClick={() => handlePagination(activePage + 1)}
       />
     </div>
