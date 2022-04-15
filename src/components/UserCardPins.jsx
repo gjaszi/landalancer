@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { RiUserSearchLine } from "react-icons/ri"
-import { IoClose, IoPinOutline } from "react-icons/io5"
+import { IoClose } from "react-icons/io5"
 import { MdLocationPin } from "react-icons/md"
 
 const UserCardPins = ({ user }) => {
