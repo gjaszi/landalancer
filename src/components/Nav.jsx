@@ -21,7 +21,7 @@ const Nav = () => {
 
   return (
     <>
-      <header className="h-12 mb-12">
+      <header className="h-12">
         <div className="mx-auto h-full lg:max-w-7xl p-6 flex items-center justify-center relative z-20 bg-slate-900">
           <Notifications />
           <Link to="/" className="mr-auto text-2xl font-bold inline-block tracking-widest select-none">

@@ -4,7 +4,6 @@ import Pagination from "../components/Pagination"
 import UserCard from "../components/UserCard"
 import Layout from "../components/Layout"
 import { DataContext } from "../context/DataContext"
-import PageTitle from "../components/PageTitle"
 
 const Discover = () => {
   const { userData } = useContext(DataContext)
@@ -37,9 +36,9 @@ const Discover = () => {
   }
 
   return (
-    <Layout>
-      <PageTitle title="People you might like" />
+    <Layout title="People you might like">
       <Selector options={[4, 6, 8, 10, 12]} {...selectorProps} />
+
       <div className="grid gap-4 lg:grid-cols-2">
         {userData.slice(getStartIndex(), getEndIndex()).map((user) => {
           return <UserCard key={user.login.uuid} user={user} />

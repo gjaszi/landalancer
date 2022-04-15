@@ -43,7 +43,7 @@ const UserCard = ({ user }) => {
           />
         </p>
         <p className="text-sky-500">Front-end Developer</p>
-        <p className="hidden sm:block text-sm text-slate-300">{user.email}</p>
+        <p className="hidden sm:block text-sm text-slate-300">{user.login.username}</p>
       </div>
       {/* controls */}
       <div className="flex flex-col justify-evenly rounded-lg">

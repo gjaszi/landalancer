@@ -2,7 +2,7 @@ import React from "react"
 
 const Selector = ({ options, resultsPerPage, setResultsPerPage }) => {
   return (
-    <div className="max-w-fit ml-auto my-4 drop-shadow-lg select-none">
+    <div className="max-w-fit ml-auto drop-shadow-lg select-none mb-4">
       <p className="text-right px-1">Results</p>
       <div className="bg-slate-800 rounded-b-lg rounded-tl-lg p-2 ">
         {options.map((option) => (
