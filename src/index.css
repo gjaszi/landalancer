@@ -3,19 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply antialiased;
-  }
   html {
-    @apply h-screen;
-  }
-  html {
-    -webkit-tap-highlight-color: transparent;
+    @apply antialiased text-slate-100 font-sans bg-slate-900;
   }
   html,
   body,
   #root {
-    @apply h-full text-slate-100 font-sans bg-slate-900;
+    @apply min-h-screen;
   }
   #root {
     @apply flex flex-col relative;

@@ -1,31 +1,33 @@
-import React, { useEffect, useState, createContext, useCallback } from "react"
-import axios from "axios"
+import React, { useEffect, useLayoutEffect, useState, createContext, useCallback } from 'react';
 
-export const DataContext = createContext()
+export const DataContext = createContext();
+
+async function fetchUsers() {
+  const response = await fetch('https://randomuser.me/api/?results=40');
+  const users = await response.json();
+  return users.results;
+}
 
 const DataContextProvider = ({ children }) => {
-  const [userData, setUserData] = useState([])
-  const [pins, setPins] = useState([])
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-  const [notificationMessage, setNotificationMessage] = useState("")
+  const [userData, setUserData] = useState([]);
+  const [pins, setPins] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [notificationMessage, setNotificationMessage] = useState('');
 
-  const fetchUsers = useCallback(async () => {
-    const response = await axios.get(`https://randomuser.me/api/?results=40`)
-    setUserData(response.data.results)
-  }, [])
-
-  useEffect(() => {
-    fetchUsers()
-  }, [fetchUsers])
+  useLayoutEffect(() => {
+    fetchUsers().then((users) => {
+      setUserData(users);
+    });
+  }, []);
 
   const handleResize = useCallback(() => {
-    setWindowWidth(window.innerWidth)
-  }, [setWindowWidth])
+    setWindowWidth(window.innerWidth);
+  }, [setWindowWidth]);
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [handleResize])
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [handleResize]);
 
   const values = {
     userData,
@@ -34,9 +36,9 @@ const DataContextProvider = ({ children }) => {
     windowWidth,
     notificationMessage,
     setNotificationMessage,
-  }
+  };
 
-  return <DataContext.Provider value={values}>{children}</DataContext.Provider>
-}
+  return <DataContext.Provider value={values}>{children}</DataContext.Provider>;
+};
 
-export default DataContextProvider
+export default DataContextProvider;
